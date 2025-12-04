@@ -1,0 +1,48 @@
+from utils.llm import ask_llm
+from tools.code_runner import run_code_safely
+
+class CodingAgent:
+    role = "coding"
+
+    async def run(self, user_input: str) -> str:
+        """
+        Handles:
+        - Code generation
+        - Code debugging
+        - Explaining errors
+        - Suggesting line-by-line fixes
+        """
+
+        # If user requests code execution
+        if any(k in user_input.lower() for k in ["run", "execute", "test this", "execute this"]):
+            code = self.extract_code(user_input)
+            if not code:
+                return "I tried, but I'm not psychic — I need the actual code to run 😄."
+
+            result = await run_code_safely(code)
+            return f"🧪 **Execution Result:**\n```\n{result}\n```"
+
+        # Otherwise use LLM to assist
+        prompt = f"""
+        You are a senior AI programmer with a witty, professional tone.
+
+        User request:
+        {user_input}
+
+        Requirements:
+        - If debugging, identify the exact line number or cause.
+        - Provide corrected code when possible.
+        - Keep the tone warm and slightly humorous, like a friendly expert.
+        - Never be condescending.
+        """
+
+        llm_response = ask_llm(prompt)
+        return llm_response
+
+    def extract_code(self, text: str) -> str:
+        """
+        Extract code from a triple-backtick block: ```python ... ```
+        """
+        import re
+        match = re.search(r"```(?:python)?\n([\s\S]+?)```", text)
+        return match.group(1) if match else None
