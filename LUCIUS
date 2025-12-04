@@ -1,0 +1,43 @@
+unified_ai_system/
+│
+├── backend/
+│   ├── main.py
+│   ├── config.py
+│   ├── router.py
+│   ├── orchestrator/
+│   │   ├── core_router.py
+│   │   ├── agent_selector.py
+│   │   ├── failover.py
+│   │   └── personality.py
+│   │
+│   ├── agents/
+│   │   ├── coding_agent.py
+│   │   ├── therapy_agent.py
+│   │   ├── customer_service_agent.py
+│   │   ├── research_agent.py
+│   │   ├── website_agent.py
+│   │   └── personal_ai.py
+│   │
+│   ├── tools/
+│   │   ├── code_runner.py
+│   │   ├── file_tools.py
+│   │   ├── web_tools.py
+│   │   └── rag_tools.py
+│   │
+│   ├── memory/
+│   │   ├── short_term.py
+│   │   ├── long_term.py
+│   │   └── embeddings.py
+│   │
+│   ├── debug/
+│   │   ├── error_catcher.py
+│   │   ├── debug_agent.py
+│   │   └── log_store.py
+│   │
+│   └── utils/
+│       ├── llm.py
+│       ├── logger.py
+│       └── settings.py
+│
+└── frontend/
+    └── (Will be generated after backend)
