@@ -1,0 +1,18 @@
+from collections import deque
+
+# Simple in-memory short-term buffer
+_short_term_memory = deque(maxlen=10)
+
+def get_st_memory() -> str:
+    """
+    Returns the current short-term conversational memory as a text block.
+    """
+    if not _short_term_memory:
+        return "No recent conversation."
+    return "\n".join(_short_term_memory)
+
+def update_st_memory(message: str):
+    """
+    Adds a user message to short-term memory.
+    """
+    _short_term_memory.append(f"User said: {message}")
